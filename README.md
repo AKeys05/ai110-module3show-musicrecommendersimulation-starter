@@ -29,6 +29,12 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+Real-world systems capture a user's preferences and assigns each song a set of measurable features. They calculate a compatability score between the user and every song candidate, and ranks the scores to find the best matches. 
+
+My simulation will mirror this structure by:
+- assigning each song a set of categorical and numerical features (mood, energy, tempo, valence, danceability, acousticness)
+- storing the user's preferred value for each of the feature types in their profile (favorite mood, favorite genre, target energy, etc.)
+- when computing a song score, prioritizing 1) genre and mood match and 2) numerical proximity for energy
 ---
 
 ## Getting Started
