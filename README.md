@@ -35,6 +35,24 @@ My simulation will mirror this structure by:
 - assigning each song a set of categorical and numerical features (mood, energy, tempo, valence, danceability, acousticness)
 - storing the user's preferred value for each of the feature types in their profile (favorite mood, favorite genre, target energy, etc.)
 - when computing a song score, prioritizing 1) genre and mood match and 2) numerical proximity for energy
+
+The finalized algorithm recipe works as follows:
+1. The user gives preferences or liked songs
+2. The program will build a user taste profile with their preferred mood and genre signals as well as numeric targets for energy, tempo, valence, danceability, and acousticness.
+3. Each single song in songs.csv will be iterated through to read the song's features, compute a weighted similarity score, and then save the song and its total score.
+4. All scored songs will be sorted from higest to lowest
+5. Apply diversity rules
+6. Return top K recommendations as ranked list of recommendations
+
+Scoring Logic: 
+- Score = Mood(25) + Genre(15) + Energy(15) + Tempo(10) + Valence(12) + Danceability(13) + Acousticness(10)
+- Mood and Genre get full points for an exact match, otherwise a zero.
+- Energy, valence, danceability, and acousticness use this similarity formula -> 1 - |x_song - x_user|
+- Feature points = feature weight * similarity
+- Tempo uses this similarity formula -> 1 - min(|t_song - t_user|/80, 1)
+- Tempo points = 10 * tempo similarity
+
+Potential biases could occur due to the high weights placed on exact mood and genre matches. This could lead to over-favoring of frequently represented categories in the dataset and underrecommending of niche or cross-genre songs. Users may also be unable to explore new styles, moods and artists as much since it scores based on past preferences.
 ---
 
 ## Getting Started
