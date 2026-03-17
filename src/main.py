@@ -19,8 +19,16 @@ def main() -> None:
     songs = load_songs("data/songs.csv") 
     print(f"Loaded {len(songs)} songs.")
 
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    # Comparison profile: should strongly favor intense rock over chill lofi.
+    user_prefs = {
+        "genre": "rock",
+        "mood": "intense",
+        "energy": 0.92,
+        "tempo_bpm": 150.0,
+        "valence": 0.45,
+        "danceability": 0.58,
+        "acousticness": 0.10,
+    }
 
     recommendations = recommend_songs(user_prefs, songs, k=5)
 
