@@ -120,6 +120,8 @@ Write 1 to 2 paragraphs here about what you learned:
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
 
+Just from making this simple music recommender system, I learned how much goes into the behind the scenes of the advanced tools we use on popular platforms today. In theory the process of assigning scores to each song and producing a ranked list based upon user preferences sounds intuitive, but creating one yourself truly makes you wonder how complex some of the modern systems' compatability scoring algorithms are. It encouraged me to appreciate the accuracy and reliability of the one I use day-to-day, especially considering how much larger their song database is. As shown from the limitations I experienced, its easy for systems like these to unfairly favor songs that match the exact preferred mood and genre, even if the other features are not similar.
+
 
 ---
 
