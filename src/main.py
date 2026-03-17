@@ -16,17 +16,17 @@ except ImportError:
     from recommender import load_songs, recommend_songs
 
 # Change this one value to switch the default profile used by main().
-ACTIVE_PROFILE = "punk_spirit"
+ACTIVE_PROFILE = "default"
 
 PROFILE_PRESETS = {
     "default": {
-        "genre": "rock",
-        "mood": "intense",
-        "energy": 0.92,
-        "tempo_bpm": 150.0,
-        "valence": 0.45,
-        "danceability": 0.58,
-        "acousticness": 0.10
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.60,
+        "tempo_bpm": 110.0,
+        "valence": 0.65,
+        "danceability": 0.65,
+        "acousticness": 0.40
     },
     "acoustic_focus": {
         "genre": "folk",

@@ -42,16 +42,16 @@ Scoring Logic:
 
 Potential biases could occur due to the high weights placed on exact mood and genre matches. This could lead to over-favoring of frequently represented categories in the dataset and underrecommending of niche or cross-genre songs. Users may also be unable to explore new styles, moods and artists as much since it scores based on past preferences.
 
-Screenshot 1: Default Profile Results
+Screenshot 1: Default Profile Results - Favors upbeat, mainstream and mid-tempo tracks
 ![Screenshot of terminal output for the default profile](images/default_profile.png)
 
-Screenshot 2: Acoustic Focus Profile Results
+Screenshot 2: Acoustic Focus Profile Results - Favors more mellow and acoustic tracks
 ![Screenshot of terminal output for the acoustic focus profile](images/acoustic_focus_profile.png)
 
-Screenshot 3: Club Rush Profile Results
+Screenshot 3: Club Rush Profile Results - Favors more high-energy, danceable and low-acoustic tracks
 ![Screenshot of terminal output for the club rush profile](images/club_rush_profile.png)
 
-Screenshot 4: Punk Spirit Profile Results
+Screenshot 4: Punk Spirit Profile Results - Favors very fast, intense and low-acoustic tracks
 ![Screenshot of terminal output for the punk spirit profile](images/punk_spirit_profile.png)
 
 ---
