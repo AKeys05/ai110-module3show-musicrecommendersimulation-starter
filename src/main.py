@@ -16,7 +16,7 @@ except ImportError:
     from recommender import load_songs, recommend_songs
 
 # Change this one value to switch the default profile used by main().
-ACTIVE_PROFILE = "default"
+ACTIVE_PROFILE = "punk_spirit"
 
 PROFILE_PRESETS = {
     "default": {
@@ -26,34 +26,35 @@ PROFILE_PRESETS = {
         "tempo_bpm": 150.0,
         "valence": 0.45,
         "danceability": 0.58,
-        "acousticness": 0.10,
+        "acousticness": 0.10
     },
-    "tie": {
-        "genre": "lofi",
-        "mood": "chill",
-        "energy": 0.39,
-        "tempo_bpm": 75.0,
-        "valence": 0.58,
-        "danceability": 0.60,
-        "acousticness": 0.79,
+    "acoustic_focus": {
+        "genre": "folk",
+        "mood": "nostalgic",
+        "energy": 0.38,
+        "tempo_bpm": 88.0,
+        "valence": 0.66,
+        "danceability": 0.45,
+        "acousticness": 0.92
     },
-    "conflicting": {
-        "genre": "rock",
-        "mood": "chill",
-        "energy": 0.92,
-        "tempo_bpm": 150.0,
-        "valence": 0.65,
-        "danceability": 0.40,
-        "acousticness": 0.85,
+    "club_rush": {
+        "genre": "edm",
+        "mood": "energetic",
+        "energy": 0.97,
+        "tempo_bpm": 130.0,
+        "valence": 0.72,
+        "danceability": 0.93,
+        "acousticness": 0.03
     },
-    "single_feature": {
-        "mood": "chill",
-        "energy": 0.50,
-        "tempo_bpm": 120.0,
-        "valence": 0.50,
-        "danceability": 0.50,
-        "acousticness": 0.50,
-    },
+    "punk_spirit": {
+        "genre": "punk",
+        "mood": "rebellious",
+        "energy": 0.95,
+        "tempo_bpm": 176.0,
+        "valence": 0.42,
+        "danceability": 0.56,
+        "acousticness": 0.05,
+    }
 }
 
 def main() -> None:
