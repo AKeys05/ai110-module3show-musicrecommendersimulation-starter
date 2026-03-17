@@ -17,18 +17,6 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
-
-Some prompts to answer:
-
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
-
-You can include a simple diagram or bullet list if helpful.
-
 Real-world systems capture a user's preferences and assigns each song a set of measurable features. They calculate a compatability score between the user and every song candidate, and ranks the scores to find the best matches. 
 
 My simulation will mirror this structure by:
@@ -54,8 +42,14 @@ Scoring Logic:
 
 Potential biases could occur due to the high weights placed on exact mood and genre matches. This could lead to over-favoring of frequently represented categories in the dataset and underrecommending of niche or cross-genre songs. Users may also be unable to explore new styles, moods and artists as much since it scores based on past preferences.
 
-![Screenshot of terminal output showing recommendations and reasons](recommender_terminal.png)
+Screenshot 1: Default Profile Results
+![Screenshot 1 of terminal output showing recommendations and reasons](recommender_terminal.png)
 
+Screenshot 2: Tied Profile Results
+
+Screenshot 3: Conflicting Preferences Profile Results
+
+Screenshot 4: Single-feature Domination Profile Results
 ---
 
 ## Getting Started

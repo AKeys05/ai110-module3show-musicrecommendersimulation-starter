@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Any
 from dataclasses import dataclass
 import csv
 
@@ -39,15 +39,75 @@ class Recommender:
         """Initializes the recommender with a catalog of songs."""
         self.songs = songs
 
+    @staticmethod
+    def _song_to_dict(song: Song) -> Dict[str, Any]:
+        """Converts a Song dataclass into the dict shape used by score_song."""
+        return {
+            "id": song.id,
+            "title": song.title,
+            "artist": song.artist,
+            "genre": song.genre,
+            "mood": song.mood,
+            "energy": song.energy,
+            "tempo_bpm": song.tempo_bpm,
+            "valence": song.valence,
+            "danceability": song.danceability,
+            "acousticness": song.acousticness,
+        }
+
+    @staticmethod
+    def _song_from_dict(song: Dict[str, Any]) -> Song:
+        """Converts a song dictionary into a Song dataclass."""
+        return Song(
+            id=int(song["id"]),
+            title=str(song["title"]),
+            artist=str(song["artist"]),
+            genre=str(song["genre"]),
+            mood=str(song["mood"]),
+            energy=float(song["energy"]),
+            tempo_bpm=float(song["tempo_bpm"]),
+            valence=float(song["valence"]),
+            danceability=float(song["danceability"]),
+            acousticness=float(song["acousticness"]),
+        )
+
+    @staticmethod
+    def _prefs_from_user(user: UserProfile) -> Dict[str, Any]:
+        """Maps UserProfile to the flexible preference schema used by score_song."""
+        return {
+            "genre": user.favorite_genre,
+            "mood": user.favorite_mood,
+            "energy": user.target_energy,
+            # Simple mapping: acoustic lovers prefer 1.0, others prefer 0.0.
+            "acousticness": 1.0 if user.likes_acoustic else 0.0,
+        }
+
+    def _rank_songs(self, user_prefs: Dict[str, Any], k: int) -> List[Tuple[Song, float, str]]:
+        """Scores and ranks songs for a preference dictionary."""
+        if k <= 0:
+            return []
+
+        scored: List[Tuple[Song, float, str]] = []
+        for song in self.songs:
+            song_dict = self._song_to_dict(song)
+            score, reasons = score_song(user_prefs, song_dict)
+            scored.append((song, score, "; ".join(reasons)))
+
+        ranked = sorted(scored, key=lambda item: item[1], reverse=True)
+        return ranked[:k]
+
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
         """Returns up to k recommended songs for the given user profile."""
-        # TODO: Implement recommendation logic
-        return self.songs[:k]
+        user_prefs = self._prefs_from_user(user)
+        ranked = self._rank_songs(user_prefs, k)
+        return [song for song, _score, _explanation in ranked]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
         """Returns a short explanation for why a song was recommended."""
-        # TODO: Implement explanation logic
-        return "Explanation placeholder"
+        user_prefs = self._prefs_from_user(user)
+        score, reasons = score_song(user_prefs, self._song_to_dict(song))
+        explanation = "; ".join(reasons)
+        return f"score {score:.2f}: {explanation}"
 
 def load_songs(csv_path: str) -> List[Dict]:
     """Loads songs from a CSV file into a list of dictionaries."""
@@ -130,19 +190,13 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
 
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
     """Ranks songs by score and returns the top k with explanation text."""
-    if k <= 0:
-        return []
-
-    # Score every song, then rank descending by score.
-    scored_songs: List[Tuple[Dict, float, str]] = [
+    recommender = Recommender([Recommender._song_from_dict(song) for song in songs])
+    ranked = recommender._rank_songs(user_prefs, k)
+    return [
         (
-            song,
-            song_score,
-            "; ".join(reasons),
+            Recommender._song_to_dict(song),
+            score,
+            explanation,
         )
-        for song in songs
-        for song_score, reasons in [score_song(user_prefs, song)]
+        for song, score, explanation in ranked
     ]
-
-    ranked = sorted(scored_songs, key=lambda item: item[1], reverse=True)
-    return ranked[:k]
