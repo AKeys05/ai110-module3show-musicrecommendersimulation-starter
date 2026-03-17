@@ -36,21 +36,21 @@ class Recommender:
     Required by tests/test_recommender.py
     """
     def __init__(self, songs: List[Song]):
+        """Initializes the recommender with a catalog of songs."""
         self.songs = songs
 
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
+        """Returns up to k recommended songs for the given user profile."""
         # TODO: Implement recommendation logic
         return self.songs[:k]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
+        """Returns a short explanation for why a song was recommended."""
         # TODO: Implement explanation logic
         return "Explanation placeholder"
 
 def load_songs(csv_path: str) -> List[Dict]:
-    """
-    Loads songs from a CSV file.
-    Required by src/main.py
-    """
+    """Loads songs from a CSV file into a list of dictionaries."""
     songs: List[Dict] = []
 
     with open(csv_path, mode="r", newline="", encoding="utf-8") as csv_file:
@@ -74,12 +74,7 @@ def load_songs(csv_path: str) -> List[Dict]:
     return songs
 
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
-    """
-    Scores one song against user preferences using weighted matching.
-
-    Returns:
-        (total_score, reasons)
-    """
+    """Scores one song and returns a numeric score plus human-readable reasons."""
     weights = {
         "mood": 25.0,
         "genre": 15.0,
@@ -134,10 +129,7 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     return score, reasons
 
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
-    """
-    Functional implementation of the recommendation logic.
-    Required by src/main.py
-    """
+    """Ranks songs by score and returns the top k with explanation text."""
     if k <= 0:
         return []
 
