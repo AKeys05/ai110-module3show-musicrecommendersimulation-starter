@@ -53,6 +53,9 @@ Scoring Logic:
 - Tempo points = 10 * tempo similarity
 
 Potential biases could occur due to the high weights placed on exact mood and genre matches. This could lead to over-favoring of frequently represented categories in the dataset and underrecommending of niche or cross-genre songs. Users may also be unable to explore new styles, moods and artists as much since it scores based on past preferences.
+
+![Screenshot of terminal output showing recommendations and reasons](recommender_terminal.png)
+
 ---
 
 ## Getting Started
