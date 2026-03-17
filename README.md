@@ -28,9 +28,8 @@ The finalized algorithm recipe works as follows:
 1. The user gives preferences or liked songs
 2. The program will build a user taste profile with their preferred mood and genre signals as well as numeric targets for energy, tempo, valence, danceability, and acousticness.
 3. Each single song in songs.csv will be iterated through to read the song's features, compute a weighted similarity score, and then save the song and its total score.
-4. All scored songs will be sorted from higest to lowest
-5. Apply diversity rules
-6. Return top K recommendations as ranked list of recommendations
+4. All scored songs will be sorted from highest to lowest
+5. Return top K recommendations as ranked list of recommendations
 
 Scoring Logic: 
 - Score = Mood(25) + Genre(15) + Energy(15) + Tempo(10) + Valence(12) + Danceability(13) + Acousticness(10)
