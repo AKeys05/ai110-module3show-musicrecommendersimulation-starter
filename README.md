@@ -89,6 +89,8 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
+I tested four distinct user profiles on my music recommender system: default, acoustic focus, club rush and punk spirit. I was looking for verification that the five recommendations had accurately calculated song scores that matched the vibe of the profile in terms of the tempo, energy, mood, etc. I felt that all 4 of the tested profiles returned expected results (e.g., mellow study music for acoustic focus and high-energy dancing songs for club rush). I also ran a few tests with some critical edge cases such as if the profile has conflicting preferences, tied preferences, or a single feature that dominates the rest. In all cases, it again behaved as expected by heavily favoring the highest-weighted mood or genre matches, and then using the numeric similarities to break close calls.
+
 ---
 
 ## Limitations and Risks
@@ -102,6 +104,8 @@ Examples:
 - It might over favor one genre or mood
 
 You will go deeper on this in your model card.
+
+The most significant limitation or "filter-bubble" within the current scoring logic is that mood and genre are only scored based upon exact equality. This means one exact label can dominate the ranking and lock users into a narrow category. Also, the top-k ranking structure amplifies repetition and order bias. It doesn't take into account diversity, novelty or artist caps so the same profile will likely get the same list of recommendations each time.
 
 ---
 
